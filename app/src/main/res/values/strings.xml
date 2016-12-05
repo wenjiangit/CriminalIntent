@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CriminalIntent</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="crime_title_hint">Enter a title for crime</string>
+    <string name="crime_title_label">Title</string>
+    <string name="crime_details_label">Details</string>
+    <string name="crime_solved_label">Solved?</string>
+    <string name="crimes_title">Crimes</string>
+    <string name="data_picker_title">Data of crime:</string>
+    <string name="new_crime">New Crime</string>
+    <string name="show_subtitle">Show Subtitle</string>
+    <string name="hide_subtitle">Hide Subtitle</string>
+    <string name="subtitle">If you see something,say something.</string>
+    <string name="delete_crime">Delete</string>
+    <string name="no_crime_to_show">No crime record to show</string>
+
+</resources>
