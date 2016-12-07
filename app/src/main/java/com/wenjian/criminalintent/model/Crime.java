@@ -18,11 +18,13 @@ public class Crime {
 
     private Date mDate;
     private boolean mSovled;
+    private Photo mPhoto;
 
     private static final String JSON_ID = "id";
     private static final String JSON_TITLE = "title";
     private static final String JSON_SOLVED = "solved";
     private static final String JSON_DATE = "date";
+    private static final String JSON_PHOTO = "photo";
 
     public Crime() {
         //生成唯一标识符
@@ -35,11 +37,12 @@ public class Crime {
         if (json.has(JSON_TITLE)){
             mTitle = json.getString(JSON_TITLE);
         }
+        if (json.has(JSON_PHOTO)){
+            mPhoto = new Photo(json.getJSONObject(JSON_PHOTO));
+        }
         mDate = new Date(json.getLong(JSON_DATE));
         mSovled = json.getBoolean(JSON_SOLVED);
     }
-
-
 
     public JSONObject toJSON() throws JSONException {
         JSONObject jsonObject = new JSONObject();
@@ -47,6 +50,7 @@ public class Crime {
         jsonObject.put(JSON_SOLVED,mSovled);
         jsonObject.put(JSON_TITLE,mTitle);
         jsonObject.put(JSON_DATE,mDate.getTime());
+        jsonObject.put(JSON_PHOTO,mPhoto.toJson());
         return jsonObject;
     }
 
@@ -76,6 +80,14 @@ public class Crime {
 
     public void setSovled(boolean sovled) {
         mSovled = sovled;
+    }
+
+    public Photo getPhoto() {
+        return mPhoto;
+    }
+
+    public void setPhoto(Photo photo) {
+        mPhoto = photo;
     }
 
     @Override

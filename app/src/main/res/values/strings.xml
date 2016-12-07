@@ -16,5 +16,9 @@
     <string name="subtitle">If you see something,say something.</string>
     <string name="delete_crime">Delete</string>
     <string name="no_crime_to_show">No crime record to show</string>
+    <string name="take">Take!</string>
 
+    <string name="less_camera_permission">由于相机权限未开启,APP无法正常运行,请到设置-应用-CriminalIntent中开启【相机】权限</string>
+
+    <string name="friendly_tip">温馨提醒</string>
 </resources>

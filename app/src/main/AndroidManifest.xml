@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.wenjian.criminalintent">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,9 +22,15 @@
         <activity android:name=".activity.CrimeActivity">
         </activity>
         <activity android:name=".activity.CrimePagerActivity">
-            <meta-data android:name="android.support.PARENT.ACTIVITY"
-                       android:value=".activity.CrimeListActivity">
+            <meta-data
+                android:name="android.support.PARENT.ACTIVITY"
+                android:value=".activity.CrimeListActivity">
             </meta-data>
+        </activity>
+        <activity android:name=".activity.CrimeCameraActivity"
+                  android:screenOrientation="landscape"
+                  android:theme="@style/Theme.AppCompat.NoActionBar"
+            >
         </activity>
     </application>
 

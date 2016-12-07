@@ -9,6 +9,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,6 +29,7 @@ import com.wenjian.criminalintent.R;
 import com.wenjian.criminalintent.activity.CrimePagerActivity;
 import com.wenjian.criminalintent.model.Crime;
 import com.wenjian.criminalintent.model.CrimeLab;
+import com.wenjian.criminalintent.util.TimeUtil;
 
 import java.util.ArrayList;
 
@@ -45,7 +48,6 @@ public class CrimeListFragment extends ListFragment {
 
     public CrimeListFragment() {
         // Required empty public constructor
-        Log.d(TAG,"bind data...");
     }
 
     @Override
@@ -72,7 +74,49 @@ public class CrimeListFragment extends ListFragment {
 
     private void initView(View view) {
         ListView listview = (ListView) view.findViewById(android.R.id.list);
-        registerForContextMenu(listview);
+//        registerForContextMenu(listview);
+        listview.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
+        listview.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+            @Override
+            public void onItemCheckedStateChanged(ActionMode actionMode, int i, long l, boolean b) {
+
+            }
+
+            @Override
+            public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+                MenuInflater inflater = actionMode.getMenuInflater();
+                inflater.inflate(R.menu.crime_list_item_context,menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.menu_item_delete_crime:
+                        CrimeLab crimeLab = CrimeLab.get(getActivity());
+                        for (int i = mAdapter.getCount() - 1; i >= 0 ; i--) {
+                            if (getListView().isItemChecked(i)){
+                                crimeLab.deleteCrime(mAdapter.getItem(i));
+                            }
+                        }
+                        actionMode.finish();
+                        mAdapter.notifyDataSetChanged();
+                        return true;
+                }
+                return false;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode actionMode) {
+
+            }
+        });
+
         Button bt_new_crime = (Button) view.findViewById(R.id.bt_new_crime);
         bt_new_crime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +160,7 @@ public class CrimeListFragment extends ListFragment {
             }
             Crime crime = getItem(position);
             TextView data = (TextView) convertView.findViewById(R.id.crime_list_item_dataTextView);
-            data.setText(crime.getDate().toString());
+            data.setText(TimeUtil.date2String(crime.getDate()));
             TextView title = (TextView) convertView.findViewById(R.id.crime_list_item_titleTextView);
             title.setText(crime.getTitle());
             CheckBox solved = (CheckBox) convertView.findViewById(R.id.crime_list_item_solvedCheckBox);
