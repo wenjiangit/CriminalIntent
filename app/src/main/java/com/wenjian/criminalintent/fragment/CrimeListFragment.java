@@ -29,6 +29,7 @@ import com.wenjian.criminalintent.R;
 import com.wenjian.criminalintent.activity.CrimePagerActivity;
 import com.wenjian.criminalintent.model.Crime;
 import com.wenjian.criminalintent.model.CrimeLab;
+import com.wenjian.criminalintent.util.JLog;
 import com.wenjian.criminalintent.util.TimeUtil;
 
 import java.util.ArrayList;
@@ -137,7 +138,7 @@ public class CrimeListFragment extends ListFragment {
 //        super.onListItemClick(l, v, position, id);
 //        Crime c = (Crime) getListAdapter().getItem(position);
         Crime c = mAdapter.getItem(position);
-        Log.d(TAG,c.getTitle() + "was clicked");
+        JLog.d(TAG,c.getTitle() + "was clicked");
 
         Intent intent= new Intent(getContext(),CrimePagerActivity.class);
         intent.putExtra(CrimeFragment.EXTRA_CRIME_ID,c.getId());

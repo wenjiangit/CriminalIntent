@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.wenjian.criminalintent.R;
+import com.wenjian.criminalintent.util.JLog;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -78,20 +80,20 @@ public class CrimeCameraFragment extends Fragment {
                 e.printStackTrace();
             } catch (IOException e) {
                 success = false;
-                Log.e(TAG, "Error writing to file:"+fileName,e);
+                JLog.e(TAG, "Error writing to file:"+fileName,e);
             }finally {
                 if (out != null){
                     try {
                         out.close();
                     } catch (IOException e) {
-                        Log.e(TAG, "Error closing file:"+fileName,e);
+                        JLog.e(TAG,"Error closing file:"+fileName,e);
                         success = false;
                     }
                 }
             }
             
             if (success){
-                Log.i(TAG, "JPG saved at:"+fileName);
+                JLog.i(TAG, "JPG saved at:"+fileName);
                 Intent intent = new Intent();
                 intent.putExtra(EXTRA_PHOTO_FILENAME,fileName);
                 getActivity().setResult(Activity.RESULT_OK,intent);
@@ -136,8 +138,7 @@ public class CrimeCameraFragment extends Fragment {
                         mCamera.setPreviewDisplay(surfaceHolder);
                     }
                 } catch (IOException e) {
-//                    e.printStackTrace();
-                    Log.e(TAG, "Error setting up preview display:" + e);
+                    JLog.e(TAG, "Error setting up preview display:",e);
                 }
             }
 
@@ -162,6 +163,7 @@ public class CrimeCameraFragment extends Fragment {
 
     @OnClick(R.id.bt_take_picture)
     public void onClick() {
+        mProgressContainer.setVisibility(View.VISIBLE);
         if (mCamera!= null){
             mCamera.takePicture(mShutterCallback,null,mPictureCallback);
         }
@@ -179,7 +181,7 @@ public class CrimeCameraFragment extends Fragment {
                         .setTitle(R.string.friendly_tip)
                         .setMessage(R.string.less_camera_permission)
                         .setCancelable(true)
-                        .setIcon(R.mipmap.ic_launcher)
+                        .setIcon(R.mipmap.icon)
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

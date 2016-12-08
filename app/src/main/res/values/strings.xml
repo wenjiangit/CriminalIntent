@@ -17,8 +17,24 @@
     <string name="delete_crime">Delete</string>
     <string name="no_crime_to_show">No crime record to show</string>
     <string name="take">Take!</string>
+    <string name="crime_suspect_text">Choose suspect</string>
+    <string name="crime_report_text">Send crime report</string>
+    <string name="crime_call_text">Call suspect</string>
+
+    <string name="crime_report">%1$s!
+        The Crime was discovered on %2$s.%3$s, and %4$s
+    </string>
+
+    <string name="crime_report_solved">the case is solved</string>
+    <string name="crime_report_unsolved">the case is not solved</string>
+    <string name="crime_report_noSuspect">There is no suspect.</string>
+    <string name="crime_report_suspect">The suspect is %s.</string>
+    <string name="crime_report_subject">CriminalIntent Crime Report</string>
+    <string name="send_report">Send crime report via</string>
+
+
+    <string name="no_photo_to_delete">还没有照片可以删除哦!</string>
 
     <string name="less_camera_permission">由于相机权限未开启,APP无法正常运行,请到设置-应用-CriminalIntent中开启【相机】权限</string>
-
     <string name="friendly_tip">温馨提醒</string>
 </resources>

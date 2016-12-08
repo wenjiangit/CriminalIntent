@@ -3,6 +3,8 @@ package com.wenjian.criminalintent.model;
 import android.content.Context;
 import android.util.Log;
 
+import com.wenjian.criminalintent.util.JLog;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -28,7 +30,7 @@ public class CrimeLab {
             mCrimes = mSerializer.loadCrimes();
         } catch (Exception e) {
             mCrimes = new ArrayList<>();
-            Log.e(TAG,"Error loading crimes: "+e.toString());
+            JLog.e(TAG,"Error loading crimes: ",e);
         }
 
     }
@@ -60,10 +62,10 @@ public class CrimeLab {
     public boolean saveCrimes(){
         try {
             mSerializer.saveCrimes(mCrimes);
-            Log.d(TAG,"crimes saved to file");
+            JLog.d(TAG,"crimes saved to file");
             return true;
         } catch (Exception e) {
-            Log.e(TAG,"Error saving crimes:"+e);
+            JLog.e(TAG,"Error saving crimes:",e);
             return false;
         }
     }
